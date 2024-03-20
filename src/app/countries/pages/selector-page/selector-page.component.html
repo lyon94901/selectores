@@ -1,0 +1,47 @@
+<h1 class="mt-3">Selectores anidados</h1>
+<hr>
+<form [formGroup]="formulario">
+  <!-- Region -->
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Continente:</label>
+      <select class="form-control" formControlName="region">
+        <option value="">-- Seleccione Continente --</option>
+        <option *ngFor="let item of regions" [value]="item">{{ item }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Countries -->
+  <div class="row mb-3" *ngIf="countriesByRegion.length > 0">
+    <div class="col">
+      <label class="form-label">País:</label>
+      <select class="form-control" formControlName="country">
+        <option value="">-- Seleccione País --</option>
+        <option *ngFor="let item of countriesByRegion" [value]="item.cca3">{{ item.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- borders -->
+  <div class="row mb-3" *ngIf="borders.length > 0">
+    <div class="col">
+      <label class="form-label">Fronteras:</label>
+      <select class="form-control" formControlName="border">
+        <option value="">-- Seleccione la frontera --</option>
+        <!-- <option *ngFor="let item of borders" [value]="item">{{ item }}</option> -->
+        <option *ngFor="let item of borders" [value]="item.cca3">{{ item.name }}</option>
+      </select>
+    </div>
+  </div>
+</form>
+
+<h3>Validación de formulario</h3>
+<hr>
+<code>
+  {{ formulario.value | json }}
+</code>
+<hr>
+<p>
+  Formulario válido: {{ formulario.valid }}
+</p>
